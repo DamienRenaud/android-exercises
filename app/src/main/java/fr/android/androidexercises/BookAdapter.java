@@ -1,6 +1,7 @@
 package fr.android.androidexercises;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -10,30 +11,38 @@ import java.util.List;
 public class BookAdapter extends BaseAdapter {
 
     private final List<Book> books;
+    private final LayoutInflater inflater;
 
     public BookAdapter(Context context, List<Book> books) {
         this.books = books;
-        // TODO LayoutInflater.from()
+        this.inflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return 0; // TODO
+        return books.size(); // TODO
     }
 
     @Override
     public Book getItem(int position) {
-        return null; // TODO
+        return books.get(position); // TODO
     }
 
     @Override
     public long getItemId(int position) {
-        return 0; // TODO
+        return books.get(position).hashCode(); // TODO
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null; // TODO
+        if(convertView == null) {
+            convertView = this.inflater.inflate(R.layout.custom_view_item_book, parent, false);
+        }
+
+        BookItemView bookItemView = (BookItemView) convertView;
+        Book book = books.get(position);
+        bookItemView.bindView(book);
+        return bookItemView; // TODO
     }
 
 }
