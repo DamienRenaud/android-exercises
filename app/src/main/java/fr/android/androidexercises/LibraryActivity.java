@@ -1,5 +1,7 @@
 package fr.android.androidexercises;
 
+import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -8,6 +10,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class LibraryActivity extends AppCompatActivity {
 
@@ -29,6 +37,28 @@ public class LibraryActivity extends AppCompatActivity {
                 // TODO Add book to intent
                 intent.putExtra(BookActivity.BOOK, book);
                 startActivity(intent);
+            }
+        });
+
+        final Date currentDate = new Date();
+        Calendar.getInstance().
+
+        Button datePickerButton = (Button) findViewById(R.id.openDatePicker);
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(LibraryActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                        Toast.makeText(LibraryActivity.this, dayOfMonth + "/" + monthOfYear + "/" + year, Toast.LENGTH_SHORT).show();
+                        new TimePickerDialog(LibraryActivity.this, new TimePickerDialog.OnTimeSetListener() {
+                            @Override
+                            public void onTimeSet(TimePicker timePicker, int i, int i1) {
+                                Toast.makeText(LibraryActivity.this, i + ":" + i1, Toast.LENGTH_SHORT).show();
+                            }
+                        }, currentDate.getHours(), currentDate.getMinutes(), true).show();
+                    }
+                }, currentDate.getYear()+1900, currentDate.getMonth(), currentDate.getDay()).show();
             }
         });
     }
