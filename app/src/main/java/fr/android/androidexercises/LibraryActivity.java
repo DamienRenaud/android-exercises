@@ -3,6 +3,13 @@ package fr.android.androidexercises;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 import timber.log.Timber;
 
 public class LibraryActivity extends AppCompatActivity {
@@ -17,9 +24,29 @@ public class LibraryActivity extends AppCompatActivity {
 
         // TODO build Retrofit
 
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://henri-potier/xebia.fr/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
         // TODO create a service
+        HenriPotierService service = retrofit.create(HenriPotierService.class);
 
         // TODO listBooks()
+        service.getBooks().enqueue(new Callback<List<Book>>() {
+            @Override
+            public void onResponse(Call<List<Book>> call, Response<List<Book>> response) {
+                List<Book> list = response.body();
+                for(Book book : list) {
+                    Timber.log(1, "Book : ", book);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Book>> call, Throwable t) {
+
+            }
+        });
 
         // TODO enqueue call and display book title
 
