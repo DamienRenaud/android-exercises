@@ -1,5 +1,6 @@
 package fr.android.androidexercises;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -31,6 +32,9 @@ public class LoginActivity extends AppCompatActivity {
                 presenter.checkCredentials(passwordEdit.getText().toString());
             }
         });
+
+        Intent intent = new Intent(this, BigJobService.class);
+        startService(intent);
     }
 
     @Override

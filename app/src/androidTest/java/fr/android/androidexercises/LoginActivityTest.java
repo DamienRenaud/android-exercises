@@ -12,12 +12,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.*;
-import static android.support.test.espresso.action.ViewActions.*;
-import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.assertion.ViewAssertions.*;
-import static android.support.test.espresso.matcher.ViewMatchers.*;
-
 @RunWith(AndroidJUnit4.class)
 @LargeTest
 public class LoginActivityTest {
@@ -29,12 +23,12 @@ public class LoginActivityTest {
     @Test
     public void shouldTryLoginAndSuccess() throws Exception {
         // TODO test login
-        onView(withId(R.id.usernameEdit)).perform(typeText("b@xebia.fr"));
-        onView(withId(R.id.passwordEdit)).perform(typeText("password"), closeSoftKeyboard());
+        Espresso.onView(ViewMatchers.withId(R.id.usernameEdit)).perform(ViewActions.typeText("b@xebia.fr"));
+        Espresso.onView(ViewMatchers.withId(R.id.passwordEdit)).perform(ViewActions.typeText("password"), ViewActions.closeSoftKeyboard());
 
-        onView(withId(R.id.loginButton)).perform(click());
+        Espresso.onView(ViewMatchers.withId(R.id.loginButton)).perform(ViewActions.click());
 
-        onView(withId(R.id.loggedText)).check(matches(isDisplayed()));
+        Espresso.onView(ViewMatchers.withId(R.id.loggedText)).check(ViewAssertions.matches(ViewMatchers.isDisplayed()));
 
 
     }
