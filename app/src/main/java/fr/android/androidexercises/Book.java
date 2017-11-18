@@ -1,27 +1,52 @@
 package fr.android.androidexercises;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.List;
+
 /**
  * Created by damien on 16/11/2017.
  */
 
-public class Book {
+public class Book implements Parcelable{
 
     private String isbn;
     private String title;
     private String price;
     private String cover;
-    private String synopsis;
+    private List<String> synopsis;
 
     public Book(String title, String price) {
         this.title = title;
         this.price = price;
     }
 
-    public String getSynopsis() {
+    protected Book(Parcel in) {
+        isbn = in.readString();
+        title = in.readString();
+        price = in.readString();
+        cover = in.readString();
+        synopsis = in.createStringArrayList();
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel in) {
+            return new Book(in);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
+
+    public List<String> getSynopsis() {
         return synopsis;
     }
 
-    public void setSynopsis(String synopsis) {
+    public void setSynopsis(List<String> synopsis) {
         this.synopsis = synopsis;
     }
 
@@ -71,5 +96,19 @@ public class Book {
     @Override
     public int hashCode() {
         return isbn.hashCode();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(isbn);
+        parcel.writeString(title);
+        parcel.writeString(price);
+        parcel.writeString(cover);
+        parcel.writeStringList(synopsis);
     }
 }
