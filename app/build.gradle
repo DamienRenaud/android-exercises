@@ -28,4 +28,13 @@ dependencies {
             "com.android.support:appcompat-v7:$support_version",
             "com.android.support:design:$support_version"
     )
+
+    // TODO add Retrofit
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+
+    // TODO add GSon converter for Retrofit
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    // TODO add Timber
+    compile 'com.jakewharton.timber:timber:4.6.0'
 }

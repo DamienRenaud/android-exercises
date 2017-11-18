@@ -18,6 +18,10 @@ public class Step1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_step1, container, false);
+        int viewId = getArguments().getInt("viewId");
+        TextView textView = view.findViewById(R.id.step1TextView);
+
+        textView.setText("Id de la view : " + viewId);
         return view;
     }
 
