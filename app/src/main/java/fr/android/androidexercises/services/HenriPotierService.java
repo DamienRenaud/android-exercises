@@ -1,7 +1,8 @@
-package fr.android.androidexercises;
+package fr.android.androidexercises.services;
 
 import java.util.List;
 
+import fr.android.androidexercises.model.Book;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -9,7 +10,7 @@ import retrofit2.http.GET;
  * Created by damien on 16/11/2017.
  */
 
-interface HenriPotierService {
+public interface HenriPotierService {
 
     @GET("books")
     Call<List<Book>> getBooks();

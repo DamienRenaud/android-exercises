@@ -1,4 +1,4 @@
-package fr.android.androidexercises;
+package fr.android.androidexercises.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -11,10 +11,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import fr.android.androidexercises.R;
+import fr.android.androidexercises.model.Book;
+
 
 public class BookDetailFragment extends Fragment {
-
-    // TODO Override onCreateViewMethod
 
 
     @Nullable
@@ -27,7 +28,6 @@ public class BookDetailFragment extends Fragment {
         ImageView bookCover = view.findViewById(R.id.bookCover);
 
         Glide.with(this).load(book.getCover()).into(bookCover);
-
 
         textView.setText(book.getSynopsis().get(0));
         return view;

@@ -1,4 +1,4 @@
-package fr.android.androidexercises;
+package fr.android.androidexercises.model;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import fr.android.androidexercises.fragments.BookListFragment;
+import fr.android.androidexercises.R;
 
 /**
  * Created by damien on 16/11/2017.
