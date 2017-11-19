@@ -1,5 +1,6 @@
 package fr.android.androidexercises;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -25,7 +26,6 @@ public class LibraryActivity extends AppCompatActivity implements BookListFragme
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.containerFrameLayout, new BookListFragment(), BookListFragment.class.getSimpleName())
                 .commit();
-        //View viewById = findViewById(R.id.containerFrameLayout);
     }
 
 
@@ -38,11 +38,20 @@ public class LibraryActivity extends AppCompatActivity implements BookListFragme
         bundle.putParcelable("book", book);
         Timber.d(book.getTitle());
         bookDetailFragment.setArguments(bundle);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.containerFrameLayout, bookDetailFragment, BookDetailFragment.class.getSimpleName())
-                .addToBackStack("step1")
-                .commit();
+
+        if(Configuration.ORIENTATION_LANDSCAPE == getResources().getConfiguration().orientation) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.bookDetailFrameLayout, bookDetailFragment, BookDetailFragment.class.getSimpleName())
+//                    .addToBackStack("step1")
+                    .commit();
+        } else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.containerFrameLayout, bookDetailFragment, BookDetailFragment.class.getSimpleName())
+                    .addToBackStack("step1")
+                    .commit();
+        }
     }
 
 }
