@@ -18,9 +18,6 @@ public class LibraryActivity extends AppCompatActivity implements BookListFragme
         Timber.plant(new Timber.DebugTree());
         Timber.log(1, "Book : ");
 
-
-
-
         // TODO replace BookListFragment in containerFrameLayout
 
         getSupportFragmentManager().beginTransaction()

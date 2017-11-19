@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,12 +15,18 @@ import java.util.List;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> {
 
-    private final List<Book> books;
+    private List<Book> books;
     private LayoutInflater inflater;
     private final BookListFragment.OnNextListener listener;
 
     public BookAdapter(LayoutInflater inflater, List<Book> books, BookListFragment.OnNextListener listener) {
         this.books = books;
+        this.inflater = inflater;
+        this.listener = listener;
+    }
+
+    public BookAdapter(LayoutInflater inflater, BookListFragment.OnNextListener listener) {
+        this.books = new ArrayList<>();
         this.inflater = inflater;
         this.listener = listener;
     }
@@ -55,6 +62,11 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.MyViewHolder> 
     @Override
     public int getItemCount() {
         return this.books.size();
+    }
+
+    public void setBooks(List<Book> books) {
+        this.books = books;
+        this.notifyDataSetChanged();
     }
 
     class MyViewHolder extends RecyclerView.ViewHolder {

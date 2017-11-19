@@ -25,11 +25,10 @@ public class BookListFragment extends Fragment {
 
     private static final String step0 = "This is step 0";
 
-    private TextView textView;
     private OnNextListener listener;
-
-    private static final Random RANDOM = new Random();
-
+    private RecyclerView recyclerView;
+    private LayoutInflater layoutInflater;
+    private View root;
 
     @Override
     public void onAttach(Context context) {
@@ -41,9 +40,12 @@ public class BookListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_book_list, container, false);
+        root = inflater.inflate(R.layout.fragment_book_list, container, false);
+        recyclerView = root.findViewById(R.id.bookListView);
+        recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
+        recyclerView.setAdapter(new BookAdapter(LayoutInflater.from(BookListFragment.this.getContext()), listener));
 
-        return view;
+        return root;
     }
 
     @Override
@@ -66,10 +68,8 @@ public class BookListFragment extends Fragment {
                 for(Book b: books) {
                     Timber.d(b.getTitle());
                 }
-
-                RecyclerView recyclerView = getView().findViewById(R.id.bookListView);
-                recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1));
-                recyclerView.setAdapter(new BookAdapter(LayoutInflater.from(getContext()), books, listener));
+                
+                ((BookAdapter) recyclerView.getAdapter()).setBooks(books);
 
             }
 
